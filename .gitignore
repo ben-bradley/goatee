@@ -1,0 +1,6 @@
+
+.bowerrc
+client/**
+
+node_modules
+.rebooted
