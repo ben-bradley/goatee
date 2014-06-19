@@ -34,7 +34,6 @@ app.use(flash());
 
 app.use(express.static(__dirname+'/../client')); // serve the client
 app.use('/auth', require('./auth')); // load the authentication
-//app.use('/auth', require('./auth')(passport)); // load the authentication
 app.use('/api', require('./api')); // load the API
 
 // Kick this pig!
@@ -45,4 +44,8 @@ console.log('app listening on '+config[ENV].server.uri())
 // Mmm, bacon!
 // ===========
 
-// Inspired by http://scotch.io/tutorials/javascript/build-a-restful-api-using-node-and-express-4
+/*
+Inspired by:
+  http://scotch.io/tutorials/javascript/build-a-restful-api-using-node-and-express-4
+  http://scotch.io/tutorials/javascript/easy-node-authentication-setup-and-local
+*/

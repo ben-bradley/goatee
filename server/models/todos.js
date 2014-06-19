@@ -9,7 +9,8 @@ var TodosSchema = new Schema({
   completed: { type: Boolean, default: false },
   urgent_on: Date,
   important: { type: Boolean, default: false },
-  description: String
+  description: String,
+  user: String
 }, {
   collection: 'todos'
 });

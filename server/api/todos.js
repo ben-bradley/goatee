@@ -10,7 +10,7 @@ module.exports = function(api, mw) {
 
     // get all todos :: GET /api/todos
     .get(function(req, res) {
-      Todos.find(function(err, todos) {
+      Todos.find({ user: req.session.passport.user }, function(err, todos) {
         res.send(err || todos);
       });
     })
@@ -18,10 +18,14 @@ module.exports = function(api, mw) {
     // add a todo :: POST /api/todos
     .post(function(req, res) {
       var todo = new Todos(req.body);
+      todo.user = req.session.passport.user;
       todo.save(function(err) {
         res.send(err || todo);
       });
     });
+
+  // middleware to verify user
+  api.use('/todos/:id', mw.isLoggedIn);
 
   // VERB /api/todos/123456789
   api.route('/todos/:id')
