@@ -6,9 +6,8 @@ module.exports = function(auth, passport) {
   // build the HTTP route :: POST /auth/signin
   auth.route('/signin')
     .post(passport.authenticate('local-signin', {
-      successRedirect: '/#/signin/success',
-      failureRedirect: '/#/signin/failure',
-      failureFlash: true
+      successRedirect: '/auth/session',
+      failureRedirect: '/auth/session?error=Invalid credentials'
     }));
 
   // authenticate the user
@@ -22,7 +21,7 @@ module.exports = function(auth, passport) {
       if (err)
         return done(err);
       if (!user || !user.validPassword(password))
-        return done(null, false, req.flash('loginMessage', 'Invalid signin.'));
+        return done(null, false);
       return done(null, user);
     })
   }));

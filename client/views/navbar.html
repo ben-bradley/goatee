@@ -1,0 +1,78 @@
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="col-md-12">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Todos</a>
+    </div>
+    <div ng-controller='NavbarCtrl' class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+<!--
+        <li ng-class='{ active: isActive("/") }'><a href="#">Home</a></li>
+        <li ng-class='{ active: isActive("/") }'><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Nav header</li>
+            <li><a href="#">Separated link</a></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+-->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+
+        <form
+              ng-show='!signedIn'
+              class='navbar-form form-inline'
+              name='signInForm'
+              ng-submit='signIn()'>
+<!--          <span class='text-muted bg-danger' ng-show='error'>{{ error }}</span>-->
+          <div class='tooltip top' id='signInError'>
+            <div class='tooltip-inner'>
+              {{ error }}
+            </div>
+          </div>
+
+          <div class='form-group' ng-class='{ "has-error": error }'>
+            <input
+                  ng-model='email'
+                  type='text'
+                  class='form-control'
+                  placeholder='email'>
+          </div>
+          <div class='form-group' ng-class='{ "has-error": error }'>
+            <input
+                  ng-model='password'
+                  type='password'
+                  class='form-control'
+                  placeholder='password'>
+          </div>
+          <div class='form-group'>
+            <button type='submit' class='btn btn-primary'>Sign In</button>
+            <button type='button' class='btn btn-warning' ng-click='signUp()'>Sign Up</button>
+          </div>
+        </form>
+
+        <form
+              ng-show='signedIn'
+              class='navbar-form form-inline'
+              ng-submit='signOut()'>
+          <div class='form-group'>
+            <button type='submit' class='btn btn-primary'>Sign Out</button>
+          </div>
+        </form>
+
+      </ul><!-- /.navbar-right -->
+    </div><!--/.nav-collapse -->
+  </div>
+</div>

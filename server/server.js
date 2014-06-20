@@ -9,10 +9,25 @@ var express       = require('express'),
     flash         = require('connect-flash'),
     config        = require('./config');
 
+// Assign the arguments
+// ====================
+var args = {};
+process.argv.forEach(function(arg) {
+  arg = arg.match(/^--([^\=]+)=(.+)/);
+  if (arg) args[arg[1]] = arg[2];
+});
+
 // Declare global statics
 // ======================
-var ENV = process.env.ENV || 'dev';
-var PORT = process.env.PORT || config[ENV].server.port || 8080;
+var ENV = process.env.ENV =
+      process.env.ENV ||
+      args.env ||
+      'dev';
+var PORT = process.env.PORT =
+      process.env.PORT ||
+      args.port ||
+      config[ENV].server.port ||
+      8080;
 
 // Connect to Mongo
 // ================

@@ -1,6 +1,6 @@
 
 .bowerrc
-client/**
+client/bower_components/**
 
 node_modules
 .rebooted

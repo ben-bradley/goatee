@@ -4,7 +4,7 @@ module.exports = function(auth, passport) {
   auth.route('/signout')
     .get(function(req, res) {
       req.logout();
-      res.send(req.session.passport.user);
+      res.send({ signedOut: true });
     });
 
 }

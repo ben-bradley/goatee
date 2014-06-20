@@ -6,9 +6,8 @@ module.exports = function(auth, passport) {
   // build the HTTP route :: POST /auth/signup
   auth.route('/signup')
     .post(passport.authenticate('local-signup', {
-      successRedirect: '/#/signup/success',
-      failureRedirect: '/#/signup/failure',
-      failureFlash: true
+      successRedirect: '/auth/session',
+      failureRedirect: '/auth/session?error=Email already registered'
     }));
 
   // add new users
@@ -23,7 +22,7 @@ module.exports = function(auth, passport) {
         if (err)
           return done(err);
         if (user) {
-          return done(null, false, req.flash('signupMessage', 'Email already registered'));
+          return done(null, false);
         } else {
           var newUser = new User();
           newUser.local.email = email;

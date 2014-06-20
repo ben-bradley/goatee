@@ -3,7 +3,8 @@ var mongoose = require('mongoose'),
     uuid = require('uuid');
 
 var UserSchema = new mongoose.Schema({
-  _id: { type: String, default: uuid.v4() },
+//  _id: { type: String, default: uuid.v4() },
+  _id: { type: String, default: function() { return uuid.v4(); } },
   local: {
     email: String,
     password: String
