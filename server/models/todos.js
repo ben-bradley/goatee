@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var TodosSchema = new Schema({
-  _id: { type: String, default: uuid.v4() },
+  _id: { type: String, default: function() { return uuid.v4(); } },
   created: { type: Date, default: new Date() },
   updated: Date,
   completed: { type: Boolean, default: false },

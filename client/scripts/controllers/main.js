@@ -1,13 +1,21 @@
 'use strict';
 
 angular.module('todos')
-  .controller('MainCtrl', function ($scope, $http) {
-//    $http.get('/auth/session')
-//      .success(function(data) {
-//        $scope.session = data;
-//      });
-//    $http.get('/api/todos')
-//      .success(function(data) {
-//        $scope.todos = data;
-//      });
+  .controller('MainCtrl', function ($scope, TodosService, UserService) {
+
+    $scope.$on('user.change', function(user) {
+      $scope.signedIn = UserService.signedIn;
+      $scope.error = UserService.error;
+    });
+
+    $scope.$on('todos.updated', function() {
+      $scope.todos = TodosService.list;
+    });
+
+    $scope.newTodos = function() {
+      TodosService.newTodos({ description: $scope.description });
+      $scope.description = '';
+    };
+
+    TodosService.getTodos();
   });

@@ -1,4 +1,18 @@
-<div class='main'>
+<hr>
+<div class='main' ng-show='signedIn'>
+  <form ng-submit='newTodos()' class='form form-inline'>
+    <div class='input-group'>
+      <input
+            class='form-control'
+            type='text'
+            name='description'
+            placeholder='description'
+            ng-model='description'>
+      <span class='input-group-btn'>
+        <button class='btn btn-primary' type='submit'>add</button>
+      </span>
+    </div>
+  </form>
   <ul>
     <li ng-repeat='todo in todos'>{{ todo.description }}</li>
   </ul>
