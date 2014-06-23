@@ -15,7 +15,6 @@ angular.module('todos')
         .get('api/todos')
         .success(function(data) {
           todos.list = data;
-          todos.list.reverse();
           todos.broadcast();
         });
     };
