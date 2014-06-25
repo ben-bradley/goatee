@@ -9,7 +9,8 @@ var mw = {
   }
 };
 
-require('./api/ping')(api, mw);
-require('./api/todos')(api, mw);
-
-module.exports = api;
+module.exports = function() {
+  require('./api/ping')(api, mw);
+  require('./api/todos')(api, mw);
+  return api;
+}

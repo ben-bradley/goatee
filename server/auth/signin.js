@@ -22,6 +22,9 @@ module.exports = function(auth, passport) {
         return done(err);
       if (!user || !user.validPassword(password))
         return done(null, false);
+//      var cookie = req.headers.cookie,
+//          sid = cookie.match(/connect.sid=s%3A([^;]+);*/)[1];
+//      sessions[user._id] = sid;
       return done(null, user);
     })
   }));

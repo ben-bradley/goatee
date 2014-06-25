@@ -15,13 +15,15 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-require('./auth/signin')(auth, passport);
-require('./auth/signup')(auth, passport);
-require('./auth/signout')(auth, passport);
-require('./auth/session')(auth, passport);
+module.exports = function() {
+  require('./auth/signin')(auth, passport);
+  require('./auth/signup')(auth, passport);
+  require('./auth/signout')(auth, passport);
+  require('./auth/session')(auth, passport);
 
-if (process.env.ENV == 'dev') {
-  require('./auth/test')(auth, passport);
+  if (process.env.ENV == 'dev') {
+    require('./auth/test')(auth, passport);
+  }
+
+  return auth;
 }
-
-module.exports = auth;

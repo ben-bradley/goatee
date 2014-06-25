@@ -8,7 +8,6 @@ var express       = require('express'),
     passport      = require('passport'),
     http          = require('http'),
     socketio      = require('socket.io'),
-//    flash         = require('connect-flash'),
     config        = require('./config');
 
 // Assign the arguments
@@ -40,24 +39,27 @@ mongoose.connect(config[ENV].mongo.connectionString());
 var app = express();
 var server = http.createServer(app);
 var io = socketio.listen(server);
+var sessionStore = new session.MemoryStore();
 
 // Configure the server
 // ====================
 app.use(bodyParser());
 app.use(cookieParser());
-app.use(session({ secret: ''+new Date().getTime() }));
+app.use(session({
+  store: sessionStore,
+  secret: ''+new Date().getTime()
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
-//app.use(flash());
 
 app.use(express.static(__dirname+'/../client')); // serve the client
-app.use('/auth', require('./auth')); // load the authentication
-app.use('/api', require('./api')); // load the API
+app.use('/auth', require('./auth')()); // load the authentication
+app.use('/api', require('./api')()); // load the API
 
 // Load the Socket.IO
 // ==================
-require('./io')(io, app);
+require('./io')(io, sessionStore);
 
 // Kick this pig!
 // ==============

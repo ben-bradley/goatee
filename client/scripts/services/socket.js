@@ -3,9 +3,8 @@
 angular.module('todos')
   .service('socket', function($rootScope) {
 
-    this.connect = function(namespace) {
-      console.log('connecting: ', namespace)
-      var _socket = io.connect(namespace);
+    this.connect = function(namespace, options) {
+      var _socket = io.connect(namespace, options);
       _socket._on = _socket.on;
       _socket._emit = _socket.emit;
 
